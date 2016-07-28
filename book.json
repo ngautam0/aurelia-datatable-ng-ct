@@ -1,0 +1,19 @@
+{
+  "root": "./doc",
+  "plugins": [
+    "edit-link",
+    "github"
+  ],
+  "pluginsConfig": {
+    "edit-link": {
+      "base": "https://github.com/SpoonX/aurelia-datatable/edit/master/doc",
+      "label": "Edit This Page"
+    },
+    "github": {
+      "url": "https://github.com/spoonx/aurelia-datatable"
+    },
+    "versions": {
+      "type": "tags"
+    }
+  }
+}
