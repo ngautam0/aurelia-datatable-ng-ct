@@ -53,10 +53,16 @@ export class DataTable {
   }
 
   pageChanged() {
+    if(!this.ready){
+      return;
+    }
     this.load();
   }
 
   limitChanged() {
+    if(!this.ready){
+      return;
+    }
     this.load();
   }
 
@@ -218,10 +224,9 @@ export class DataTable {
   }
 
   displayValue(row, ...propertyName) {
-    return fetchFrom(row, normalizeKey(...propertyName));
+    return fetchFrom(row, ...normalizeKey(...propertyName));
   }
 }
-
 
 /**
  * Used to normalize keys of mixed array and dot-separated string to a single array of undotted strings
@@ -238,6 +243,7 @@ function normalizeKey(key, ...rest) {
    * if not we concat our normalized key with the normalized rest
    */
   let normalized = Array.isArray(key) ? normalizeKey(...key) : key.split('.');
+
   return rest.length === 0 ? normalized : normalized.concat(normalizeKey(...rest));
 }
 

@@ -139,10 +139,16 @@ define(["exports", "aurelia-framework", "aurelia-view-manager", "aurelia-orm", "
     };
 
     DataTable.prototype.pageChanged = function pageChanged() {
+      if (!this.ready) {
+        return;
+      }
       this.load();
     };
 
     DataTable.prototype.limitChanged = function limitChanged() {
+      if (!this.ready) {
+        return;
+      }
       this.load();
     };
 
@@ -278,7 +284,7 @@ define(["exports", "aurelia-framework", "aurelia-view-manager", "aurelia-orm", "
         propertyName[_key - 1] = arguments[_key];
       }
 
-      return fetchFrom(row, normalizeKey.apply(undefined, propertyName));
+      return fetchFrom.apply(undefined, [row].concat(normalizeKey.apply(undefined, propertyName)));
     };
 
     _createClass(DataTable, [{

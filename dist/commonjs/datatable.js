@@ -126,10 +126,16 @@ var DataTable = exports.DataTable = (_dec = (0, _aureliaFramework.customElement)
   };
 
   DataTable.prototype.pageChanged = function pageChanged() {
+    if (!this.ready) {
+      return;
+    }
     this.load();
   };
 
   DataTable.prototype.limitChanged = function limitChanged() {
+    if (!this.ready) {
+      return;
+    }
     this.load();
   };
 
@@ -265,7 +271,7 @@ var DataTable = exports.DataTable = (_dec = (0, _aureliaFramework.customElement)
       propertyName[_key - 1] = arguments[_key];
     }
 
-    return fetchFrom(row, normalizeKey.apply(undefined, propertyName));
+    return fetchFrom.apply(undefined, [row].concat(normalizeKey.apply(undefined, propertyName)));
   };
 
   _createClass(DataTable, [{

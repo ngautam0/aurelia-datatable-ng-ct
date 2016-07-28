@@ -109,10 +109,16 @@ export let DataTable = (_dec = customElement('datatable'), _dec2 = resolvedView(
   }
 
   pageChanged() {
+    if (!this.ready) {
+      return;
+    }
     this.load();
   }
 
   limitChanged() {
+    if (!this.ready) {
+      return;
+    }
     this.load();
   }
 
@@ -273,7 +279,7 @@ export let DataTable = (_dec = customElement('datatable'), _dec2 = resolvedView(
   }
 
   displayValue(row, ...propertyName) {
-    return fetchFrom(row, normalizeKey(...propertyName));
+    return fetchFrom(row, ...normalizeKey(...propertyName));
   }
 }, (_descriptor = _applyDecoratedDescriptor(_class2.prototype, "criteria", [_dec4], {
   enumerable: true,
@@ -357,6 +363,7 @@ export let DataTable = (_dec = customElement('datatable'), _dec2 = resolvedView(
 
 function normalizeKey(key, ...rest) {
   let normalized = Array.isArray(key) ? normalizeKey(...key) : key.split('.');
+
   return rest.length === 0 ? normalized : normalized.concat(normalizeKey(...rest));
 }
 

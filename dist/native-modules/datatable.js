@@ -116,10 +116,16 @@ export var DataTable = (_dec = customElement('datatable'), _dec2 = resolvedView(
   };
 
   DataTable.prototype.pageChanged = function pageChanged() {
+    if (!this.ready) {
+      return;
+    }
     this.load();
   };
 
   DataTable.prototype.limitChanged = function limitChanged() {
+    if (!this.ready) {
+      return;
+    }
     this.load();
   };
 
@@ -255,7 +261,7 @@ export var DataTable = (_dec = customElement('datatable'), _dec2 = resolvedView(
       propertyName[_key - 1] = arguments[_key];
     }
 
-    return fetchFrom(row, normalizeKey.apply(undefined, propertyName));
+    return fetchFrom.apply(undefined, [row].concat(normalizeKey.apply(undefined, propertyName)));
   };
 
   _createClass(DataTable, [{
