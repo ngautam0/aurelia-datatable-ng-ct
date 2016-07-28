@@ -53,10 +53,16 @@ export class DataTable {
   }
 
   pageChanged() {
+    if(!this.ready){
+      return;
+    }
     this.load();
   }
 
   limitChanged() {
+    if(!this.ready){
+      return;
+    }
     this.load();
   }
 
